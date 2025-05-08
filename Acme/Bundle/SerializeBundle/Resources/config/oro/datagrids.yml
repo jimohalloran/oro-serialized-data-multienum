@@ -1,0 +1,30 @@
+datagrids:
+  demo-entity-grid:
+    extended_entity_name: "Acme\\Bundle\\SerializeBundle\\Entity\\Demo"
+    source:
+      acl_resource: acme_demo_view
+      type: orm
+      query:
+        select:
+          - e.id
+          - e.name
+        from:
+          - { table: Acme\Bundle\SerializeBundle\Entity\Demo, alias: e }
+    properties:
+      id: ~
+      view_link:
+        type: url
+        route: acme_demo_view
+        params:
+          - id
+    columns:
+      name:
+        label: acme.serialize.demo.name.label
+    actions:
+      view:
+        type:          navigate
+        label:         View
+        link:          view_link
+        icon:          eye
+        acl_resource:  acme_demo_view
+        rowAction:     true

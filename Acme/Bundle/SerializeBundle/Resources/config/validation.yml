@@ -1,0 +1,10 @@
+Acme\Bundle\SerializeBundle\Entity\Demo:
+  properties:
+    name:
+      - NotBlank: ~
+      - Length:
+          max: 100
+    letters:
+      - Valid: ~
+      - Count:
+          min: 1

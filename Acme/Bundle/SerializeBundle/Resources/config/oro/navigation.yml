@@ -1,0 +1,17 @@
+navigation:
+  menu_config:
+    items:
+      acme_demo:
+        label: Demo
+        route: 'acme_demo_index'
+        position: 1
+
+    tree:
+      application_menu:
+        children:
+          system_tab:
+            children:
+              acme_demo: ~
+
+  titles:
+    acme_demo_index: ~

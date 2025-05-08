@@ -1,0 +1,22 @@
+services:
+  _defaults:
+    public: false
+    autowire: true
+    autoconfigure: true
+
+  # makes classes in the bundle available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  Acme\Bundle\SerializeBundle\:
+    resource: '../../'
+    exclude: '../../Controller'
+
+#  Acme\Bundle\SerializeBundle\EventListener\Migrations\Oro61MultiEnumPostUpMigrationListener:
+#    tags:
+#      - name: kernel.event_listener
+#        event: oro_migration.post_up
+#        method: onPostUp
+#        priority: -101
+#
+#  Acme\Bundle\SerializeBundle\Migrations\RemoveMultiEnumAddRemoveKeys:
+#    arguments:
+#      $doctrine: '@doctrine'

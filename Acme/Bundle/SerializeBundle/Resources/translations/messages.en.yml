@@ -1,0 +1,9 @@
+acme:
+  serialize:
+    demo:
+      entity_label: 'Demo Entity'
+      entity_plural_label: 'Demo Entities'
+      id.label: 'Identifier'
+      letters.label: 'Letters'
+      name.label: 'Name'
+

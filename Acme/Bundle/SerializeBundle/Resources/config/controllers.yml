@@ -1,0 +1,14 @@
+services:
+  _defaults:
+    public: true
+    autowire: true
+    autoconfigure: true
+
+  # makes classes in the bundle's Controller folder available to be used as services
+  # this creates a service per class whose id is the fully-qualified class name
+  Acme\Bundle\SerializeBundle\Controller\:
+    resource: '../../Controller/'
+    calls:
+      - ['setContainer', ['@Psr\Container\ContainerInterface']]
+    tags:
+      - { name: container.service_subscriber }

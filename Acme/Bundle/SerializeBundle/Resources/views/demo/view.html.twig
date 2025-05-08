@@ -1,0 +1,53 @@
+{% extends '@OroUI/actions/view.html.twig' %}
+{% import '@OroUI/macros.html.twig' as UI %}
+{% import '@OroEmail/macros.html.twig' as email %}
+
+{% set subject = entity.name %}
+{% oro_title_set({params : {"%subject%": subject|default('N/A'|trans) }}) %}
+
+{% block navButtons %}
+    {% placeholder view_navButtons with {entity: entity} %}
+{% endblock navButtons %}
+
+{% block pageHeader %}
+    {% set breadcrumbs = {
+        'entity':      entity,
+        'indexPath':   path('acme_demo_index'),
+        'indexLabel': 'acme.serialize.demo.entity_plural_label'|trans,
+        'entityTitle': entity.name
+    } %}
+    {{ parent() }}
+{% endblock pageHeader %}
+
+{% block content_data %}
+    {% set section_general %}
+        <div class="widget-content">
+            <div class="row-fluid form-horizontal">
+                <div class="responsive-block">
+                    {{ UI.renderProperty('acme.serialize.demo.name.label'|trans, entity.name) }}
+
+                    {% set letterData %}
+                        {% for letter in entity.letters %}
+                            {{ letter.name }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    {% endset %}
+
+                    {{ UI.renderProperty('acme.serialize.demo.letters.label'|trans, letterData) }}
+                </div>
+            </div>
+        </div>
+    {% endset %}
+    {% set dataBlocks = [
+        {
+            'title': 'General'|trans,
+            'class': 'active',
+            'subblocks': [
+            { 'data' : [section_general] }
+        ]
+        }
+    ] %}
+
+    {% set id = 'demoView' %}
+    {% set data = { 'dataBlocks': dataBlocks } %}
+    {{ parent() }}
+{% endblock content_data %}

@@ -1,0 +1,4 @@
+acme_serialize_bundle:
+  resource: "@AcmeSerializeBundle/Controller"
+  type:     annotation
+  prefix:   /acme/serialize

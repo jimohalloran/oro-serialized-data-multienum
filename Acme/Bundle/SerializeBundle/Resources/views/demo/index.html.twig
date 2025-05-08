@@ -1,0 +1,17 @@
+{% extends '@OroUI/actions/index.html.twig' %}
+{% import '@OroDataGrid/macros.html.twig' as dataGrid %}
+
+{% set gridName = 'demo-entity-grid' %}
+{% set pageTitle = 'acme.serialize.demo.entity_plural_label'|trans %}
+
+{% block navButtons %}
+    {% if is_granted('acme_demo_create') %}
+        {% import '@OroUI/macros.html.twig' as UI %}
+        <div class="btn-group">
+            {{ UI.addButton({
+                'path': path('acme_demo_create'),
+                'entity_label': 'acme.serialize.demo.entity_label'|trans,
+            }) }}
+        </div>
+    {% endif %}
+{% endblock %}

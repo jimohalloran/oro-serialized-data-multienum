@@ -1,0 +1,87 @@
+<?php
+
+namespace Acme\Bundle\SerializeBundle\Tests\Unit;
+
+use Acme\Bundle\SerializeBundle\Entity\Demo;
+use Doctrine\ORM\EntityManagerInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\EnumOption;
+use Oro\Bundle\EntityExtendBundle\Entity\EnumOptionInterface;
+use Oro\Bundle\EntityExtendBundle\Entity\Repository\EnumValueRepository;
+use Oro\Bundle\EntityExtendBundle\Tools\ExtendHelper;
+use Oro\Bundle\TestFrameworkBundle\Test\WebTestCase;
+
+class DemoEntity60Test extends WebTestCase
+{
+    protected $a;
+    protected $b;
+    protected $c;
+
+    #[\Override]
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->initClient();
+
+        $manager = $this->getContainer()->get('doctrine.orm.entity_manager');
+        $className = ExtendHelper::buildEnumValueClassName('acme_enum');
+
+        /** @var EnumValueRepository $enumRepo */
+        $enumRepo = $manager->getRepository($className);
+
+        $this->a = $enumRepo->find('alpha');
+        $this->b = $enumRepo->find('bravo');
+        $this->c = $enumRepo->find('charlie');
+    }
+
+
+    public function testSetGetMultiEnumWithSingleValue()
+    {
+        $demo = new Demo();
+        $demo->setLetters([
+            $this->a,
+        ]);
+
+        $this->assertCount(1, $demo->getLetters());
+    }
+
+
+    public function testSetGetMultiEnumWithMultipleValues()
+    {
+        $demo = new Demo();
+        $demo->setLetters([
+            $this->a,
+            $this->b,
+        ]);
+
+        $this->assertCount(2, $demo->getLetters());
+    }
+
+
+    public function testAddGetMultiEnumWithSingleValue()
+    {
+        $demo = new Demo();
+        $demo->addLetter($this->a);
+
+        $this->assertCount(1, $demo->getLetters());
+    }
+
+
+    public function testAddGetMultiEnumWithMultipleValues()
+    {
+        $demo = new Demo();
+        $demo->addLetter($this->a);
+        $demo->addLetter($this->b);
+
+        $this->assertCount(2, $demo->getLetters());
+    }
+
+
+//    public function testAddGetMultiEnumWithPluralNames()
+//    {
+//        $demo = new Demo();
+//        $demo->addLetters($this->a);
+//        $demo->addLetters($this->b);
+//
+//        $this->assertCount(2, $demo->getLetters());
+//    }
+}
