@@ -79,6 +79,21 @@ class DemoEntity61Test extends WebTestCase
     }
 
 
+    public function testRemoveMultiEnum()
+    {
+        $demo = new Demo();
+        $demo->addLetter($this->a);
+
+        $this->assertCount(1, $demo->getLetters());
+
+        $demo->removeLetter($this->a);
+        $demo->addLetter($this->b);
+        $demo->addLetter($this->c);
+
+        $this->assertCount(2, $demo->getLetters());
+    }
+
+
 //    public function testAddGetMultiEnumWithPluralNames()
 //    {
 //        $demo = new Demo();
